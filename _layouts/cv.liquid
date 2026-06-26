@@ -1,0 +1,144 @@
+---
+layout: default
+---
+{% unless site.data.resume %}
+  <div class="post">
+    <header class="post-header">
+      <h1 class="post-title">{{ page.cv_heading | default: page.title }}</h1>
+      {% if page.description %}
+        <p class="post-description">{{ page.description }}</p>
+      {% endif %}
+    </header>
+
+    {% if page.cv_pdf %}
+      <div class="cv-pdf">
+        <a
+          class="cv-pdf-btn"
+          {% if page.cv_pdf contains '://' %}
+            href="{{ page.cv_pdf }}"
+          {% else %}
+            href="{{ page.cv_pdf | prepend: 'assets/pdf/' | relative_url }}"
+          {% endif %}
+          target="_blank"
+          rel="noopener noreferrer"
+          download
+        >
+          <i class="fa-solid fa-file-pdf"></i> PDF
+        </a>
+      </div>
+    {% endif %}
+
+    <article>
+      <div class="cv">
+        {% for entry in site.data.cv %}
+          <a class="anchor" id="{{ entry.title }}"></a>
+          <div class="cv-section">
+            <h3 class="cv-section-title">
+              <span class="cv-section-icon">
+                {% case entry.title %}
+                  {% when 'General Info' %}<i class="fa-solid fa-id-card"></i>
+                  {% when 'Education' %}<i class="fa-solid fa-graduation-cap"></i>
+                  {% when 'Experience' %}<i class="fa-solid fa-briefcase"></i>
+                  {% when 'Project Works' %}<i class="fa-solid fa-diagram-project"></i>
+                  {% when 'Extracurricular Activities' %}<i class="fa-solid fa-people-group"></i>
+                  {% when 'Honors and Awards' %}<i class="fa-solid fa-trophy"></i>
+                  {% when 'Certifications' %}<i class="fa-solid fa-certificate"></i>
+                  {% when 'Languages and Hobbies' %}<i class="fa-solid fa-language"></i>
+                  {% else %}<i class="fa-solid fa-circle-dot"></i>
+                {% endcase %}
+              </span>
+              {{ entry.title }}
+            </h3>
+            <div class="cv-section-body">
+              {% if entry.type == 'list' %}
+                {% include cv/list.liquid %}
+              {% elsif entry.type == 'map' %}
+                {% include cv/map.liquid %}
+              {% elsif entry.type == 'nested_list' %}
+                {% include cv/nested_list.liquid %}
+              {% elsif entry.type == 'time_table' %}
+                {% include cv/time_table.liquid %}
+              {% elsif entry.type == 'list_groups' %}
+                {% include cv/list_groups.liquid %}
+              {% else %}
+                {{ entry.contents }}
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </article>
+  </div>
+{% else %}
+  <div class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        {{ page.title }}
+        {% if page.cv_pdf %}
+          <a
+            {% if page.cv_pdf contains '://' %}
+              href="{{ page.cv_pdf }}"
+            {% else %}
+              href="{{ page.cv_pdf | prepend: 'assets/pdf/' | relative_url }}"
+            {% endif %}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="float-right"
+          >
+            <i class="fa-solid fa-file-pdf"></i>
+          </a>
+        {% endif %}
+      </h1>
+      {% if page.description %}
+        <p class="post-description">{{ page.description }}</p>
+      {% endif %}
+    </header>
+
+    <article>
+      <div class="cv">
+        {% for data in site.data.resume %}
+          {% if site.jsonresume and site.jsonresume.size > 0 %}
+            {% unless site.jsonresume contains data[0] %}
+              {% continue %}
+            {% endunless %}
+          {% endif %}
+          {% if data[0] == 'meta' or data[1].size == 0 %} {% continue %} {% endif %}
+          <a class="anchor" id="{{ data[0] }}"></a>
+          <div class="card mt-3 p-3">
+            <h3 class="card-title font-weight-medium">{{ data[0] | capitalize }}</h3>
+            <div>
+              {% case data[0] %}
+                {% when 'basics' %}
+                  {% include resume/basics.liquid %}
+                {% when 'education' %}
+                  {% include resume/education.liquid %}
+                {% when 'work' %}
+                  {% include resume/work.liquid %}
+                {% when 'volunteer' %}
+                  {% include resume/volunteer.liquid %}
+                {% when 'projects' %}
+                  {% include resume/projects.liquid %}
+                {% when 'awards' %}
+                  {% include resume/awards.liquid %}
+                {% when 'skills' %}
+                  {% include resume/skills.liquid %}
+                {% when 'publications' %}
+                  {% include resume/publications.liquid %}
+                {% when 'languages' %}
+                  {% include resume/languages.liquid %}
+                {% when 'interests' %}
+                  {% include resume/interests.liquid %}
+                {% when 'certificates' %}
+                  {% include resume/certificates.liquid %}
+                {% when 'references' %}
+                  {% include resume/references.liquid %}
+                {% else %}
+
+              {% endcase %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </article>
+  </div>
+{% endunless %}

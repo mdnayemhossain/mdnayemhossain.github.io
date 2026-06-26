@@ -1,0 +1,149 @@
+---
+layout: default
+---
+<!-- Guitar-pick (plectrum) clip-path for the profile photo; see .about-left .profile img -->
+<svg width="0" height="0" aria-hidden="true" style="position: absolute">
+  <defs>
+    <clipPath id="guitar-pick" clipPathUnits="objectBoundingBox">
+      <path d="M0.5,0 C0.73,0 1,0.13 1,0.34 C1,0.64 0.71,0.98 0.5,1 C0.29,0.98 0,0.62 0,0.29 C0,0.10 0.27,0 0.5,0 Z" />
+    </clipPath>
+  </defs>
+</svg>
+
+<div class="post">
+  <div class="about-left">
+    {% if page.profile %}
+      <div class="profile">
+        {% if page.profile.image %}
+          {% assign profile_image_path = page.profile.image | prepend: 'assets/img/' %}
+          {% if page.profile.image_circular %}
+            {% assign profile_image_class = 'img-fluid z-depth-1 rounded-circle' %}
+          {% else %}
+            {% assign profile_image_class = 'img-fluid z-depth-1
+      rounded' %}
+          {% endif %}
+          {% capture sizes %}(min-width: {{ site.max_width }}) {{ site.max_width | minus: 30 | times: 0.3}}px, (min-width: 576px)
+      30vw, 95vw"{% endcapture %}
+          {%
+            include figure.liquid loading="eager" path=profile_image_path class=profile_image_class sizes=sizes alt=page.profile.image
+            cache_bust=true
+          %}
+        {% endif %}
+        {% if page.profile.more_info %}
+          <div class="more-info">{{ page.profile.more_info }}</div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <header class="post-header">
+      <h1 class="post-title">
+        {% if site.title == 'blank' %}
+          <span class="font-weight-bold">{{ site.first_name }}</span> {{ site.middle_name }}
+          {{ site.last_name }}
+        {% else %}
+          {{ site.title }}
+        {% endif %}
+      </h1>
+      <p class="desc">{{ page.subtitle }}</p>
+    </header>
+
+    <ul class="author-info">
+      <li tabindex="0"><i class="fa-solid fa-location-dot"></i><span class="ai-label">Oulu, Finland</span></li>
+      <li tabindex="0"><i class="fa-solid fa-building-columns"></i><a class="ai-label" href="https://www.oulu.fi/en/" target="_blank" rel="noopener">University of Oulu</a></li>
+      <li tabindex="0"><i class="fa-solid fa-phone"></i><span class="ai-label">+358 417404181</span></li>
+      <li tabindex="0"><i class="fa-solid fa-envelope"></i><a class="ai-label" href="mailto:hossain.nayem.bd@gmail.com">hossain.nayem.bd@gmail.com</a></li>
+      <li tabindex="0"><i class="fa-brands fa-github"></i><a class="ai-label" href="https://github.com/mdnayemhossain" target="_blank" rel="noopener">GitHub</a></li>
+      <li tabindex="0"><i class="fa-brands fa-linkedin"></i><a class="ai-label" href="https://www.linkedin.com/in/mohammad-nayem-hossain" target="_blank" rel="noopener">LinkedIn</a></li>
+      <li tabindex="0"><i class="ai ai-researchgate"></i><a class="ai-label" href="https://www.researchgate.net/profile/Md-Hossain-763/" target="_blank" rel="noopener">ResearchGate</a></li>
+      <li tabindex="0"><i class="fa-brands fa-x-twitter"></i><a class="ai-label" href="https://twitter.com/nayemhossain007" target="_blank" rel="noopener">Twitter</a></li>
+    </ul>
+  </div>
+
+  <div class="home-main">
+    <article class="about-intro">
+      <div class="clearfix">{{ content }}</div>
+    </article>
+
+    <!-- My Journey: horizontal career/education timeline built from _data/journey.yml -->
+    {% if site.data.journey %}
+      <section class="journey">
+        <h2>My Journey</h2>
+        {% include journey.liquid %}
+      </section>
+    {% endif %}
+
+    <article class="home-extras">
+      <!-- Selected papers -->
+      {% if page.selected_papers %}
+        <h2>
+          <a href="{{ '/research/' | relative_url }}" style="color: inherit">Selected Research</a>
+        </h2>
+        {% include selected_papers.liquid %}
+      {% endif %}
+
+      <!-- Latest posts -->
+      {% if page.latest_posts and page.latest_posts.enabled %}
+        <h2>
+          <a href="{{ '/blog/' | relative_url }}" style="color: inherit">Latest Posts</a>
+        </h2>
+        {% include latest_posts.liquid %}
+      {% endif %}
+
+      <!-- Social -->
+      {% if page.social %}
+        <div class="social">
+          <div class="contact-icons">{% include social.liquid %}</div>
+
+          <div class="contact-note">{{ site.contact_note }}</div>
+        </div>
+      {% endif %}
+
+      {% if site.newsletter and site.newsletter.enabled and site.footer_fixed %}
+        {% include newsletter.liquid center=true %}
+      {% endif %}
+    </article>
+  </div>
+</div>
+
+{% comment %} Narrow-window contact island: click/tap an icon to expand it (one open at a time). {% endcomment %}
+<script>
+  (function () {
+    var mq = window.matchMedia('(max-width: 1249px)');
+
+    function closeAll(except) {
+      document.querySelectorAll('.author-info li.open').forEach(function (el) {
+        if (el !== except) el.classList.remove('open');
+      });
+    }
+
+    function toggle(li) {
+      var isOpen = li.classList.contains('open');
+      closeAll(li); // one open at a time
+      li.classList.toggle('open', !isOpen);
+    }
+
+    document.addEventListener('click', function (e) {
+      if (!mq.matches) return; // only the narrow icon island
+      var li = e.target.closest('.author-info li');
+      if (!li) {
+        closeAll(null); // clicked elsewhere -> collapse all
+        return;
+      }
+      // If an already-open badge's revealed link is clicked, let it navigate.
+      if (li.classList.contains('open') && e.target.closest('a')) return;
+      e.preventDefault();
+      toggle(li);
+    });
+
+    // Keyboard: Enter/Space toggles the focused badge.
+    document.addEventListener('keydown', function (e) {
+      if (!mq.matches) return;
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      var li = e.target.closest && e.target.closest('.author-info li');
+      if (!li) return;
+      e.preventDefault();
+      toggle(li);
+    });
+  })();
+</script>
+

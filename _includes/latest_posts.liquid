@@ -1,0 +1,37 @@
+<!-- Latest posts on the Home page, rendered with the same bibliography layout as the
+     Selected Research / Blog list so the date badges and titles line up uniformly. -->
+<div class="publications">
+  <ol class="bibliography">
+    {% assign posts = site.posts %}
+    {% if page.latest_posts.limit %}
+      {% assign post_limit = page.latest_posts.limit %}
+    {% else %}
+      {% assign post_limit = posts | size %}
+    {% endif %}
+    {% for post in posts limit: post_limit %}
+      <li>
+        <div class="row">
+          <!-- Date badge (matches the Research arXiv badge) -->
+          <div class="col col-sm-2 abbr">
+            <abbr class="badge rounded w-100">{{ post.date | date: "%b %d, %Y" }}</abbr>
+          </div>
+          <!-- Post title + description -->
+          <div class="col-sm-8">
+            <div class="title">
+              {% if post.redirect == blank %}
+                <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+              {% elsif post.redirect contains '://' %}
+                <a href="{{ post.redirect }}" target="_blank" rel="noopener">{{ post.title }}</a>
+              {% else %}
+                <a href="{{ post.redirect | relative_url }}">{{ post.title }}</a>
+              {% endif %}
+            </div>
+            {% if post.description %}
+              <div class="author">{{ post.description }}</div>
+            {% endif %}
+          </div>
+        </div>
+      </li>
+    {% endfor %}
+  </ol>
+</div>

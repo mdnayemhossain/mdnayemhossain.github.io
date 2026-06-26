@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="{{ site.lang }}">
+  <!-- Head -->
+  <head>
+    {% if page.redirect %}
+      {% if page.redirect == true %}
+        {% assign redirect = site.baseurl | append: '/' %}
+      {% elsif page.redirect contains '://' %}
+        {% assign redirect = page.redirect %}
+      {% else %}
+        {% assign redirect = page.redirect | relative_url %}
+      {% endif %}
+      <meta http-equiv="refresh" content="3; url={{ redirect }}">
+    {% endif %}
+    {% include head.liquid %}
+
+    <!-- Intro sequence: flag JS support before paint (so no-JS users never see the loader).
+         The logo loader plays on every load. -->
+    <script>
+      try {
+        document.documentElement.classList.add("js-intro");
+      } catch (e) {}
+    </script>
+  </head>
+
+  <!-- Body -->
+  <body class="{% if site.navbar_fixed %}fixed-top-nav{% endif %} {% unless site.footer_fixed %}sticky-bottom-footer{% endunless %}">
+    <!-- Intro loader: the hex "N" logo draws itself, then fades to reveal the page. -->
+    <div id="page-loader" aria-hidden="true">
+      <svg class="loader-hex" viewBox="0 0 84 96" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Loading">
+        <polygon points="42,2 80,25 80,71 42,94 4,71 4,25" />
+        <path class="loader-n" d="M30,64 L30,33 L54,64 L54,33" />
+      </svg>
+    </div>
+
+    <!-- Header -->
+    {% include header.liquid %}
+
+    <!-- Content -->
+    <div class="container mt-5" role="main">
+      {% if page.toc and page.toc.sidebar %}
+        {% if page.toc.sidebar == 'right' %}
+          <div class="row">
+            <!-- main content area -->
+            <div class="col-sm-9">{{ content }}</div>
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-3">
+              <nav id="toc-sidebar" class="sticky-top"></nav>
+            </div>
+          </div>
+        {% else %}
+          <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-3">
+              <nav id="toc-sidebar" class="sticky-top"></nav>
+            </div>
+            <!-- main content area -->
+            <div class="col-sm-9">{{ content }}</div>
+          </div>
+        {% endif %}
+      {% else %}
+        {{ content }}
+      {% endif %}
+    </div>
+
+    <!-- Footer -->
+    {% include footer.liquid %}
+
+    <!-- JavaScripts -->
+    {% include scripts.liquid %}
+
+    <!-- Intro controller (Brittany-Chiang style): play the logo loader once per session,
+         then "mount" the page so the navbar + hero stagger in. Degrades gracefully when
+         JS is off or the user prefers reduced motion. -->
+    <script>
+      (function () {
+        var html = document.documentElement;
+        var loader = document.getElementById("page-loader");
+        var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        function mount() {
+          document.body.classList.add("is-mounted");
+          document.dispatchEvent(new CustomEvent("intro:mounted"));
+        }
+        function removeLoader() {
+          if (loader && loader.parentNode) loader.parentNode.removeChild(loader);
+        }
+
+        if (reduce || html.classList.contains("no-loader")) {
+          removeLoader();
+          if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", mount);
+          else setTimeout(mount, 0);
+          return;
+        }
+
+        // Draw the logo, then reveal the page (runs on every load).
+        html.classList.add("is-loading");
+        setTimeout(function () {
+          if (loader) loader.classList.add("loader-hide");
+          html.classList.remove("is-loading");
+          mount();
+          setTimeout(removeLoader, 700);
+        }, 2000);
+      })();
+    </script>
+
+    <!-- Scroll-reveal motion: fade/rise elements in as they enter the viewport. Runs when the
+         page mounts (after the intro loader). Purely additive; structure/content unchanged. -->
+    <script>
+      (function () {
+        if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        if (!("IntersectionObserver" in window)) return;
+
+        function whenMounted(fn) {
+          if (document.body.classList.contains("is-mounted")) fn();
+          else document.addEventListener("intro:mounted", fn, { once: true });
+        }
+
+        whenMounted(function () {
+          var vh = window.innerHeight || document.documentElement.clientHeight;
+          var selectors = [
+            ".about-intro .quote-title",
+            ".about-intro p",
+            ".about-intro blockquote",
+            ".journey > h2",
+            ".journey-item",
+            ".home-extras > h2",
+            ".publications .bibliography > li",
+            ".cv-section",
+            ".cv-timeline-item",
+            ".proj-group",
+            ".project-card",
+            ".skill-group"
+          ];
+
+          var els = [];
+          selectors.forEach(function (sel) {
+            Array.prototype.forEach.call(document.querySelectorAll(sel), function (el) {
+              if (els.indexOf(el) === -1) els.push(el);
+            });
+          });
+
+          // Cascade: stagger siblings within a group.
+          function stagger(parentSel, childSel) {
+            Array.prototype.forEach.call(document.querySelectorAll(parentSel), function (parent) {
+              Array.prototype.forEach.call(parent.querySelectorAll(childSel), function (kid, i) {
+                kid.style.transitionDelay = Math.min(i, 9) * 70 + "ms";
+              });
+            });
+          }
+          stagger(".bibliography", ".bibliography > li");
+          stagger(".journey-track", ".journey-item");
+          stagger(".proj-grid", ".project-card");
+
+          var io = new IntersectionObserver(
+            function (entries, obs) {
+              entries.forEach(function (e) {
+                if (e.isIntersecting) {
+                  e.target.classList.add("is-visible");
+                  obs.unobserve(e.target);
+                }
+              });
+            },
+            { threshold: 0.1, rootMargin: "0px 0px -6% 0px" }
+          );
+
+          els.forEach(function (el) {
+            el.classList.add("reveal");
+            // Already in view on load -> show instantly (no flash); otherwise reveal on scroll.
+            if (el.getBoundingClientRect().top < vh * 0.9) el.classList.add("is-visible");
+            else io.observe(el);
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>

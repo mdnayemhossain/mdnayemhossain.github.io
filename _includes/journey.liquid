@@ -1,0 +1,25 @@
+{%- comment -%}
+  Horizontal "My Journey" timeline (data: _data/journey.yml, styles: assets/css/main.scss).
+  Milestones alternate above/below a central axis on desktop; collapses to a vertical
+  timeline on narrow screens. Each item exposes its accent colour via the --jc variable.
+{%- endcomment -%}
+<div class="journey-track">
+  {%- for item in site.data.journey -%}
+    {%- assign pos = forloop.index0 | modulo: 2 -%}
+    {%- capture card -%}
+      <div class="journey-card">
+        <span class="journey-year">{{ item.year }}</span>
+        <span class="journey-text">
+          <span class="journey-title">{{ item.title }}</span>
+          <span class="journey-place">{{ item.place }}</span>
+          {% if item.description %}<span class="journey-desc">{{ item.description }}</span>{% endif %}
+        </span>
+      </div>
+    {%- endcapture -%}
+    <div class="journey-item journey-item--{% if pos == 0 %}top{% else %}bottom{% endif %}" style="--jc: {{ item.color }};">
+      <div class="journey-slot journey-slot--top">{% if pos == 0 %}{{ card }}{% endif %}</div>
+      <span class="journey-node" aria-hidden="true"></span>
+      <div class="journey-slot journey-slot--bottom">{% if pos == 1 %}{{ card }}{% endif %}</div>
+    </div>
+  {%- endfor -%}
+</div>
