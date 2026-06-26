@@ -1,0 +1,136 @@
+- title: General Info
+  type: map
+  contents:
+    - name: Name
+      value: Mohammad Nayem Hossain
+    - name: Phone
+      value: +358 417404181
+    - name: Email
+      value: hossain.nayem.bd@gmail.com
+    - name: Address
+      value: Paalikatu 14 A, 90520 Oulu, Finland
+
+- title: Education
+  type: time_table
+  contents:
+    - title: Master of Science in <i>Electronics</i>
+      institution: <a href="https://www.oulu.fi/en/">University of Oulu</a>
+      location: Oulu, FI
+      year: 2024 - Present
+      description:
+        - Faculty of Information Technology and Electrical Engineering.
+        - The MSc in Electronics is built on three pillars - Electronics Design, Electronics Materials and Components, and Future Electronics and Measurement Techniques - emphasizing the design of circuits, materials, components, and advanced measurement techniques.
+        - Supported by research units such as Circuits and Systems (CAS), Microelectronics (MIC), and Opto-Electronics and Measurement Techniques (OPEM).
+
+    - title: Bachelor of Science in <i>Electrical and Electronic Engineering (EEE)</i>
+      institution: <a href="http://www.northsouth.edu">North South University</a>
+      location: Dhaka, BD
+      year: 2015 - 2019
+      description:
+        - <b>CGPA:</b> 3.01 out of 4.00
+        - Granted a 25% merit-based tuition waiver from the second semester onwards; ranked among the top 10% of graduates in the 'Graduating Class of 2019' (3470 graduates).
+        - title: Elective Courses
+          contents:
+            - EEE410 Semiconductor Devices and Technology
+            - EEE411 Introduction to VLSI Design
+            - EEE462 Switchgear and Protection
+        - title: EEE Core Courses
+          contents:
+            - EEE211 Digital Logic Design
+            - EEE221 Signals and Systems
+            - EEE312 Power Electronics
+            - EEE321 Introduction to Communications Systems
+            - EEE361 Electromagnetic Fields & Waves
+        - title: Mathematical Courses
+          contents:
+            - MAT125 Introduction to Linear Algebra
+            - MAT361 Probability and Statistics
+        - 'Dissertation: <a href="https://arxiv.org/ftp/arxiv/papers/1811/1811.01874.pdf">Chiral standing waves and its trapping force on chiral particles</a>'
+
+    - title: Higher Secondary Certificate <i>(Science Group)</i>
+      institution: <a href="https://dhakacollege.edu.bd/">Dhaka College</a>
+      location: Dhaka, BD
+      year: 2011 - 2012
+      description:
+        - <b>GPA:</b> 4.50 out of 5.00
+
+    - title: Secondary School Certificate <i>(Science Group)</i>
+      institution: <a href="http://www.nzs.edu.bd/">Noakhali Zilla School</a>
+      location: Noakhali, BD
+      year: 2009 - 2010
+      description:
+        - <b>GPA:</b> 5.00 out of 5.00
+
+- title: Experience
+  type: time_table
+  contents:
+    - title: Analog Layout Design Engineer
+      institution: <a href="https://www.quest-global.com/">Quest Global</a>
+      location: Dhaka, BD
+      year: Jun'22 - Jul'24
+      description:
+        - Department of Analog and Mixed Signal.
+        - Contributed to the layout design of PLL, Low Voltage Bandgap, CLKBUF, and other critical components for a high-speed SERDES project using a 6nm process node.
+        - Planned and distributed power grids for full-chip designs and implemented compact layouts with proper routing techniques.
+        - Used symmetrical array-wise routing and device placement, matched differential-pair MOSFETs, and implemented Powerfets and triple guard rings to prevent leakage.
+
+    - title: Assistant Engineer
+      institution: <a href="https://www.ulkasemi.com/">Ulkasemi Pvt. Limited</a>
+      location: Dhaka, BD
+      year: Jul'20 - May'22
+      description:
+        - Department of IC Mask Design.
+        - Created custom SOC using Planar and FinFET technologies from 22nm to 4nm process nodes.
+        - Designed Comparators, Operational Amplifiers, Bias generators, Bandgap references, Phase Locked Loops, and more.
+        - Handled power planning, floor planning, and device placement with device matching, orientation, and shielding of critical nets.
+        - Maintained symmetric routing, resolved timing issues, and worked with full-custom, p-cell, and standard-cell-based layouts across multiple time zones.
+
+    - title: Under-Graduate Teaching Assistant
+      institution: <a href="http://ece.northsouth.edu/">North South University</a>
+      location: Dhaka, BD
+      year: May'19 - Aug'19
+      description:
+        - Department of Electrical & Computer Engineering.
+        - Conducted tutorial sessions for students needing extra help outside of class hours.
+        - Assisted faculty members in preparing course materials and organizing class activities.
+        - Graded homework and assignments and provided feedback to help students improve their understanding.
+
+- title: Extracurricular Activities
+  type: time_table
+  contents:
+    - title: Member
+      institution: <a href="https://www.linkedin.com/company/ieeensu-ras/about/">IEEE NSU Robotics and Automation Society</a>
+      location: Dhaka, BD
+      year: 2015 - 2016
+      description: A student-run club at North South University advancing robotics and automation through seminars, workshops, and competitions. Being part of this community let me participate in multiple robotics competitions and develop my skills and knowledge in the field.
+
+    - title: Volunteer
+      institution: <a href="https://jaago.com.bd">JAAGO Foundation</a>
+      location: Dhaka, BD
+      year: 2014 - 2015
+      description: Founded in 2007, JAAGO provides free education to underprivileged children and promotes volunteerism in Bangladesh. Since 2014 I have participated in various events hosted by the foundation, including the celebration of World Environment Day.
+
+    - title: Community Volunteer
+      institution: <a href="https://vbd.com.bd">Volunteer for Bangladesh (VBD)</a>
+      location: Dhaka, BD
+      year: 2014 - 2015
+      description: VBD is a non-partisan volunteer and youth organization associated with the JAAGO Foundation, with over 35,000 volunteers nationwide. As a volunteer in the Dhaka division since 2014, I took part in numerous VBD events, including The Great Kindness Challenge.
+
+- title: Honors and Awards
+  type: time_table
+  contents:
+    - year: 2015 - 2019
+      items:
+        - <b>Financial Aid:</b> 25% merit-based tuition waiver from North South University, granted from the second semester (Spring'15) and throughout the following academic years.
+        - <b>Robotics Competition:</b> First prize for outstanding performance at the national robotics competition held by the Military Institute of Science & Technology (MIST).
+
+- title: Certifications
+  type: list
+  contents:
+    - <b>Virtuoso Layout Design Basics</b> - issued by <i>Cadence Design Systems</i> [<a href="https://www.credly.com/badges/51698b43-9aa6-45db-a7e5-be97678fbbdc/public_url">credential</a>]
+
+- title: Languages and Hobbies
+  type: list
+  contents:
+    - <b>Languages:</b> Bengali (Native), English.
+    - <b>Hobbies:</b> Reading books - thriller, mystery, fantasy, science fiction, and classic literature.

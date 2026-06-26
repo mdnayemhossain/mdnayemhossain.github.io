@@ -1,0 +1,77 @@
+# "Projects" page (rendered by _pages/projects.md, styled in assets/css/main.scss).
+# Two groups: Professional (industry layout/IC-mask work) and Academic (MSc course projects).
+
+- group: Professional Projects
+  icon: fa-microchip
+  note: Industry work in analog layout & IC mask design at Quest Global and Ulkasemi.
+  items:
+    - title: Digitally Controlled Oscillator (DCO)
+      category: Clock Generation Module
+      description: >-
+        Implemented a DCO as part of a Clock Generation Module in the TSMC 5nm process using the
+        Cadence layout suite. Ran multiple iterations of DECAP cell placement and routing to hit the
+        target frequency range, signal integrity, and area utilization. Collaborated with the circuit
+        designer to resolve parasitic issues by increasing device fins and adjusting threshold voltage,
+        and cleaned up all LVS/DRC/ERC violations using Calibre.
+      tech: [Cadence Virtuoso, TSMC 5nm, Calibre]
+
+    - title: PVT Sensor (Test Chip Component)
+      category: Sensor design & implementation
+      description: >-
+        Implemented a PVT sensor for a test chip using Tanner L-Edit in the TSMC 7nm process. Designed
+        the controller unit, level shifter, and VDD-off detector blocks. Created the floorplan from pin
+        information, positioned custom cells, and established the power grid. Built custom standard cells
+        for efficiency and minimized crosstalk, and resolved critical DRCs and EM/IR issues through
+        iterative discussions with the circuit designer.
+      tech: [Tanner L-Edit, TSMC 7nm, Calibre]
+
+    - title: Comparator Block Update
+      category: Analog block redesign
+      description: >-
+        Migrated and updated a comparator block to the TSMC 5nm process from a previous technology node.
+        Enhanced the layout through power-grid improvement, critical-cell separation, and coaxial
+        shielding. Executed the fill script and provided extraction reports for post-layout simulation,
+        then resolved the final sign-off DRCs including density issues.
+      tech: [TSMC 5nm, Calibre, Sign-off DRC]
+
+    - title: SERDES Receiver Unit
+      category: High-speed interface design
+      description: >-
+        Performed the layout of a receiver unit for a SERDES project in the Intel 22nm process using
+        Tanner L-Edit. Designed the RX differential amplifier and buffer-logic sub-blocks, implemented
+        transistor-matching techniques for critical transistors, maintained symmetrical routing for
+        centroid-matched devices, and addressed signal and ESD placement challenges.
+      tech: [Tanner L-Edit, Intel 22nm]
+
+- group: Academic Projects
+  icon: fa-graduation-cap
+  note: MSc Electronics course projects at the University of Oulu.
+  items:
+    - title: 16-bit Instruction Set Processor Core
+      category: Digital Techniques 2 (DT2) - Course Project
+      description: >-
+        Designed a 16-bit instruction set processor core, incorporating key components such as the
+        control unit, instruction register, and functional unit, based on specifications from the
+        Electronic Circuits and Systems Research Unit at the University of Oulu. Owned the flow from RTL
+        design and test-plan development to gate-level implementation through logic synthesis.
+      tech: [RTL Design, Logic Synthesis, Gate-level]
+
+    - title: I2S Audio Output Interface (Audioport)
+      category: Digital Techniques 3 (DT3) - Course Project
+      description: >-
+        Spearheaded the design of a synthesizable I2S audio-output block for an SoC, developing an RTL
+        model through a mix of manual coding and high-level SystemC synthesis. Implemented in
+        SystemVerilog and VHDL, verified via UVM-based simulation and formal tools, then optimized for
+        testability and power savings during synthesis. Oversaw the complete flow - from RTL design,
+        simulation, and formal verification to post-layout timing, power analysis, and manufacturing
+        test-pattern generation.
+      tech: [SystemVerilog, VHDL, SystemC, UVM]
+
+    - title: Two-Stage CMOS Op-Amp
+      category: Electronics Design 2 (ED2) - Course Project
+      description: >-
+        Designed a Miller-compensated, two-stage operational amplifier in 45nm CMOS technology to meet
+        target specifications for gain, unity-gain bandwidth, and phase margin, as set by the University
+        of Oulu. Carried it from circuit and test-bench design to mask-level implementation through
+        layout design.
+      tech: [45nm CMOS, Cadence Virtuoso, Layout Design]

@@ -1,0 +1,94 @@
+# "Skills" page (rendered by _pages/skills.md, styled in assets/css/main.scss).
+# pct = bar width (0-100); level = the label shown beside it.
+# Levels are inferred from CV evidence (professional experience, projects, certification);
+# edit freely.
+
+- group: EDA & Layout Tools
+  icon: fa-microchip
+  items:
+    - name: Cadence Virtuoso
+      level: Expert
+      pct: 95
+    - name: Tanner L-Edit
+      level: Advanced
+      pct: 82
+    - name: Synopsys Custom Compiler
+      level: Advanced
+      pct: 78
+    - name: Design Compiler
+      level: Proficient
+      pct: 65
+
+- group: Verification & Sign-off
+  icon: fa-shield-halved
+  items:
+    - name: Calibre nmDRC & nmLVS
+      level: Expert
+      pct: 92
+    - name: PVS (Physical Verification)
+      level: Proficient
+      pct: 68
+    - name: Star-RC (Parasitic Extraction)
+      level: Advanced
+      pct: 78
+    - name: Quantus (Parasitic Extraction)
+      level: Proficient
+      pct: 66
+
+- group: Simulation
+  icon: fa-wave-square
+  items:
+    - name: Cadence Spectre
+      level: Advanced
+      pct: 80
+    - name: QuestaSim
+      level: Proficient
+      pct: 68
+    - name: COMSOL Multiphysics
+      level: Proficient
+      pct: 64
+    - name: Multisim
+      level: Familiar
+      pct: 50
+
+- group: Programming & Scripting
+  icon: fa-code
+  items:
+    - name: SystemVerilog
+      level: Advanced
+      pct: 80
+    - name: Python
+      level: Proficient
+      pct: 70
+    - name: C / C++
+      level: Proficient
+      pct: 66
+    - name: Bash
+      level: Familiar
+      pct: 52
+
+- group: Other Tools
+  icon: fa-toolbox
+  items:
+    - name: KiCad
+      level: Proficient
+      pct: 65
+    - name: LaTeX
+      level: Advanced
+      pct: 80
+    - name: LabVIEW
+      level: Familiar
+      pct: 50
+    - name: Logisim
+      level: Familiar
+      pct: 55
+
+- group: Languages
+  icon: fa-language
+  items:
+    - name: Bengali (Native)
+      level: Native
+      pct: 100
+    - name: English (Proficient)
+      level: Proficient
+      pct: 85

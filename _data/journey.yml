@@ -1,0 +1,44 @@
+# "My Journey" horizontal timeline on the Home page (rendered by _includes/journey.liquid).
+# Chronological milestones drawn from _data/cv.yml (Education + Experience).
+# `color` drives the dot, stem and year accent for that milestone.
+- year: 2009 - 2010
+  title: Secondary School
+  place: Noakhali Zilla School
+  description: Science group (SSC) - GPA 5.00 / 5.00.
+  color: "#e74c3c"
+
+- year: 2011 - 2012
+  title: Higher Secondary
+  place: Dhaka College
+  description: Science group (HSC) - GPA 4.50 / 5.00.
+  color: "#e67e22"
+
+- year: 2015 - 2019
+  title: BSc in EEE
+  place: North South University
+  description: Electrical & Electronic Engineering - top 10% of the 2019 graduating class.
+  color: "#c79a11"
+
+- year: 2019
+  title: Teaching Assistant
+  place: North South University
+  description: Undergraduate TA, Dept. of Electrical & Computer Engineering.
+  color: "#27ae60"
+
+- year: 2020 - 2022
+  title: Assistant Engineer
+  place: Ulkasemi
+  description: IC mask design - custom SoC layouts from 22nm down to 4nm nodes.
+  color: "#16a3b8"
+
+- year: 2022 - 2024
+  title: Analog Layout Design Engineer
+  place: Quest Global
+  description: Analog & mixed-signal - 6nm SerDes layout (PLL, bandgap, CLKBUF).
+  color: "#2e6fdb"
+
+- year: 2024 - Present
+  title: MSc in Electronics
+  place: University of Oulu
+  description: VLSI, photonics & advanced measurement techniques.
+  color: "#6d8cad"
