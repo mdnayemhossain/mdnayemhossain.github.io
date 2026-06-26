@@ -1233,20 +1233,48 @@ nav[data-toggle="toc"] {
   height: 105px;
   overflow: visible;
 }
-.loader-hex polygon {
+// The hexagon is two arcs (top + bottom). They start apart — the top arc above
+// and the bottom arc below — then slide toward each other along the vertical
+// midline and meet at the left/right midpoints (4,48 & 80,48) to close the loop.
+.loader-hex .loader-half {
   fill: none;
   stroke: var(--global-theme-color);
   stroke-width: 4;
   stroke-linejoin: round;
-  // Round caps + a draw seam that starts/ends mid-edge (see the polygon point
-  // order in default.liquid) so the loop closes flush instead of leaving a
-  // notch at the top corner as the stroke animates shut.
-  stroke-linecap: round;
-  stroke-dasharray: 280;
-  stroke-dashoffset: 280;
-  animation: loader-draw 0.95s ease forwards 0.1s;
+  stroke-linecap: round; // round ends meet flush where the two arcs join
+  animation-duration: 0.75s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); // ease-out with a soft settle
+  animation-fill-mode: both; // hold the split start during the delay; rest assembled
+  animation-delay: 0.8s; // wait for the "N" to draw, then enclose it
 }
-// The "N" is a single stroked path that draws on after the hexagon finishes.
+.loader-hex .loader-top {
+  animation-name: loader-half-top;
+}
+.loader-hex .loader-bottom {
+  animation-name: loader-half-bottom;
+}
+@keyframes loader-half-top {
+  from {
+    transform: translateY(-26px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes loader-half-bottom {
+  from {
+    transform: translateY(26px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+// The "N" is a single stroked path that draws on first; the hexagon halves
+// then converge to enclose it.
 .loader-hex .loader-n {
   fill: none;
   stroke: var(--global-theme-color);
@@ -1255,7 +1283,7 @@ nav[data-toggle="toc"] {
   stroke-linejoin: round;
   stroke-dasharray: 110;
   stroke-dashoffset: 110;
-  animation: loader-draw 0.7s ease forwards 1.1s;
+  animation: loader-draw 0.6s ease forwards 0.1s;
 }
 @keyframes loader-draw {
   to { stroke-dashoffset: 0; }
