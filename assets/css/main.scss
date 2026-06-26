@@ -1238,6 +1238,10 @@ nav[data-toggle="toc"] {
   stroke: var(--global-theme-color);
   stroke-width: 4;
   stroke-linejoin: round;
+  // Round caps + a draw seam that starts/ends mid-edge (see the polygon point
+  // order in default.liquid) so the loop closes flush instead of leaving a
+  // notch at the top corner as the stroke animates shut.
+  stroke-linecap: round;
   stroke-dasharray: 280;
   stroke-dashoffset: 280;
   animation: loader-draw 0.95s ease forwards 0.1s;
