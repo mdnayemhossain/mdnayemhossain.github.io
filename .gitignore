@@ -13,3 +13,4 @@ vendor
 .idea
 _jekyll_serve.log
 file_structure_understand.txt
+.devtools/*.log
