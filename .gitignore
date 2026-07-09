@@ -13,4 +13,21 @@ vendor
 .idea
 _jekyll_serve.log
 file_structure_understand.txt
-.devtools/*.log
+.devtools/
+
+# Files kept locally but not needed for the live site (removed from the repo).
+/CONTRIBUTING.md
+/CUSTOMIZE.md
+/FAQ.md
+/INSTALL.md
+/Dockerfile
+/docker-compose.yml
+/docker-compose-slim.yml
+/.dockerignore
+/.pre-commit-config.yaml
+/.all-contributorsrc
+/.git-blame-ignore-revs
+/serve.ps1
+/bin/
+/lighthouse_results/
+/readme_preview/
