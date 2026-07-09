@@ -1229,52 +1229,40 @@ nav[data-toggle="toc"] {
 }
 
 .loader-hex {
-  width: 92px;
-  height: 105px;
-  overflow: visible;
+  width: 100px;
+  height: 112px;
+  overflow: visible; // let the burst sparks fly past the hexagon's box
 }
-// The hexagon is two arcs (top + bottom). They start apart — the top arc above
-// and the bottom arc below — then slide toward each other along the vertical
-// midline and meet at the left/right midpoints (4,48 & 80,48) to close the loop.
-.loader-hex .loader-half {
+// The hexagon outline draws itself in (0–0.55s)...
+.loader-hex .loader-ring {
   fill: none;
   stroke: var(--global-theme-color);
   stroke-width: 4;
   stroke-linejoin: round;
-  stroke-linecap: round; // round ends meet flush where the two arcs join
-  animation-duration: 0.75s;
-  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); // ease-out with a soft settle
-  animation-fill-mode: both; // hold the split start during the delay; rest assembled
-  animation-delay: 0.8s; // wait for the "N" to draw, then enclose it
+  stroke-linecap: round;
+  stroke-dasharray: 300; // ~perimeter of the hexagon; fully hidden at offset 300
+  stroke-dashoffset: 300;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation:
+    loader-ring-draw 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+    loader-burst 0.6s ease-in forwards 1.35s; // ...then it blows outward as a shockwave
 }
-.loader-hex .loader-top {
-  animation-name: loader-half-top;
+@keyframes loader-ring-draw {
+  to { stroke-dashoffset: 0; }
 }
-.loader-hex .loader-bottom {
-  animation-name: loader-half-bottom;
-}
-@keyframes loader-half-top {
-  from {
-    transform: translateY(-26px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
+@keyframes loader-burst {
+  0% {
+    transform: scale(1);
     opacity: 1;
   }
-}
-@keyframes loader-half-bottom {
-  from {
-    transform: translateY(26px);
+  100% {
+    transform: scale(1.9);
     opacity: 0;
   }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
 }
-// The "N" is a single stroked path that draws on first; the hexagon halves
-// then converge to enclose it.
+
+// The "N" writes itself inside the hexagon (from 0.45s), then scatters with the burst.
 .loader-hex .loader-n {
   fill: none;
   stroke: var(--global-theme-color);
@@ -1283,10 +1271,47 @@ nav[data-toggle="toc"] {
   stroke-linejoin: round;
   stroke-dasharray: 110;
   stroke-dashoffset: 110;
-  animation: loader-draw 0.6s ease forwards 0.1s;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation:
+    loader-draw 0.55s ease forwards 0.45s,
+    loader-n-burst 0.55s ease-in forwards 1.35s;
 }
 @keyframes loader-draw {
   to { stroke-dashoffset: 0; }
+}
+@keyframes loader-n-burst {
+  0% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.7) rotate(10deg);
+    opacity: 0;
+  }
+}
+
+// Atom-burst particles: hidden until the burst fires, then each spark radiates
+// outward along its own --tx/--ty vector and fades — like fragments flying off.
+.loader-hex .loader-sparks .spark {
+  fill: var(--global-theme-color);
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: loader-spark 0.7s ease-out forwards 1.35s;
+}
+@keyframes loader-spark {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.3);
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--tx), var(--ty)) scale(1);
+  }
 }
 
 // Staggered mount entrance. Initial hidden state only applies while the JS intro is

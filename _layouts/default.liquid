@@ -15,24 +15,41 @@
     {% include head.liquid %}
 
     <!-- Intro sequence: flag JS support before paint (so no-JS users never see the loader).
-         The logo loader plays on every load. -->
+         The logo loader plays once per browsing session; on later navigations we mark
+         .no-loader before paint so it never flashes again. -->
     <script>
       try {
         document.documentElement.classList.add("js-intro");
+        if (sessionStorage.getItem("introSeen")) {
+          document.documentElement.classList.add("no-loader");
+        }
       } catch (e) {}
     </script>
   </head>
 
   <!-- Body -->
   <body class="{% if site.navbar_fixed %}fixed-top-nav{% endif %} {% unless site.footer_fixed %}sticky-bottom-footer{% endunless %}">
-    <!-- Intro loader: the hex "N" logo draws itself, then fades to reveal the page. -->
+    <!-- Intro loader: the hex "N" logo appears, then bursts apart like an atom. -->
     <div id="page-loader" aria-hidden="true">
       <svg class="loader-hex" viewBox="0 0 84 96" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Loading">
-        <!-- Hexagon split along its horizontal midline: an upper arc and a lower
-             arc that slide together (top moves down, bottom moves up) to form the loop. -->
-        <path class="loader-half loader-top" d="M4,48 L4,25 L42,2 L80,25 L80,48" />
-        <path class="loader-half loader-bottom" d="M4,48 L4,71 L42,94 L80,71 L80,48" />
+        <!-- The hexagon outline draws in, the "N" writes itself inside it, then the
+             whole logo bursts outward (shockwave ring + radiating sparks) like an atom. -->
+        <polygon class="loader-ring" points="42,2 80,25 80,71 42,94 4,71 4,25" />
         <path class="loader-n" d="M30,64 L30,33 L54,64 L54,33" />
+        <g class="loader-sparks">
+          <circle class="spark" cx="42" cy="48" r="3" style="--tx: 0px; --ty: -50px" />
+          <circle class="spark" cx="42" cy="48" r="2.2" style="--tx: 24px; --ty: -40px" />
+          <circle class="spark" cx="42" cy="48" r="3.2" style="--tx: 46px; --ty: -26px" />
+          <circle class="spark" cx="42" cy="48" r="2.4" style="--tx: 52px; --ty: 0px" />
+          <circle class="spark" cx="42" cy="48" r="3" style="--tx: 45px; --ty: 26px" />
+          <circle class="spark" cx="42" cy="48" r="2.2" style="--tx: 22px; --ty: 42px" />
+          <circle class="spark" cx="42" cy="48" r="3.2" style="--tx: 0px; --ty: 52px" />
+          <circle class="spark" cx="42" cy="48" r="2.4" style="--tx: -22px; --ty: 42px" />
+          <circle class="spark" cx="42" cy="48" r="3" style="--tx: -45px; --ty: 26px" />
+          <circle class="spark" cx="42" cy="48" r="2.2" style="--tx: -52px; --ty: 0px" />
+          <circle class="spark" cx="42" cy="48" r="3.2" style="--tx: -46px; --ty: -26px" />
+          <circle class="spark" cx="42" cy="48" r="2.4" style="--tx: -24px; --ty: -40px" />
+        </g>
       </svg>
     </div>
 
@@ -89,6 +106,8 @@
           if (loader && loader.parentNode) loader.parentNode.removeChild(loader);
         }
 
+        // Skip the loader under reduced-motion, with JS disabled, or after the first
+        // load of this browsing session (flag set below / read before paint in <head>).
         if (reduce || html.classList.contains("no-loader")) {
           removeLoader();
           if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", mount);
@@ -96,14 +115,15 @@
           return;
         }
 
-        // Draw the logo, then reveal the page (runs on every load).
+        // First visit this session: play the atom-burst logo once, then reveal the page.
+        try { sessionStorage.setItem("introSeen", "1"); } catch (e) {}
         html.classList.add("is-loading");
         setTimeout(function () {
           if (loader) loader.classList.add("loader-hide");
           html.classList.remove("is-loading");
           mount();
           setTimeout(removeLoader, 700);
-        }, 2000);
+        }, 1900);
       })();
     </script>
 
