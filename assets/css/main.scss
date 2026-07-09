@@ -93,7 +93,7 @@ h6 {
   }
 }
 
-// Navbar brand: hexagon "N" logo (Brittany-Chiang style), tinted with the accent.
+// Navbar brand: hexagon "N" logo, tinted with the accent.
 .navbar-brand.logo {
   display: inline-flex;
   align-items: center;
@@ -1198,7 +1198,7 @@ nav[data-toggle="toc"] {
 }
 
 // ===========================================================================
-// Intro sequence (Brittany-Chiang style): a loader whose hex logo draws itself,
+// Intro sequence: a loader whose hex logo draws itself,
 // then the page "mounts" with the navbar + hero content staggering in. Driven by
 // classes set in _layouts/default.liquid: <html class="js-intro [no-loader]"> set
 // before paint, and <body class="is-mounted"> set when the intro finishes.

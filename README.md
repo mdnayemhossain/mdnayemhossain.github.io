@@ -41,19 +41,20 @@ The site is then available at `http://localhost:4000/`.
 
 ## Structure
 
-| Path | Contents |
-| --- | --- |
-| `_pages/` | Top-level pages (about, projects, CV, …) |
-| `_posts/` | Blog posts |
-| `_bibliography/` | Publications (BibTeX) |
-| `_layouts/`, `_includes/` | Page templates and partials |
-| `_sass/`, `assets/css/` | Styles |
-| `assets/` | Images, JS, and other static files |
-| `_config.yml` | Site configuration |
+| Path                      | Contents                                 |
+| ------------------------- | ---------------------------------------- |
+| `_pages/`                 | Top-level pages (about, projects, CV, …) |
+| `_posts/`                 | Blog posts                               |
+| `_bibliography/`          | Publications (BibTeX)                    |
+| `_layouts/`, `_includes/` | Page templates and partials              |
+| `_sass/`, `assets/css/`   | Styles                                   |
+| `assets/`                 | Images, JS, and other static files       |
+| `_config.yml`             | Site configuration                       |
 
 ## License
 
-The content of this site (text, images, writing) is © Mohammad Nayem Hossain.
+The content of this site — text, images, and writing — is © 2025 Mohammad Nayem
+Hossain.
 
-The underlying website is based on the **al-folio** theme by Maruan Al-Shedivat
-and contributors, distributed under the [MIT License](LICENSE).
+The website is built on the open-source **al-folio** Jekyll theme, used under the
+[MIT License](LICENSE); see that file for the full terms.
