@@ -1,5 +1,7 @@
-<!-- Latest posts on the Home page, rendered with the same bibliography layout as the
-     Selected Research / Blog list so the date badges and titles line up uniformly. -->
+<!--
+  Latest posts on the Home page, rendered with the same bibliography layout as the
+  Selected Research / Blog list so the date badges and titles line up uniformly.
+-->
 <div class="publications">
   <ol class="bibliography">
     {% assign posts = site.posts %}
@@ -13,7 +15,7 @@
         <div class="row">
           <!-- Date badge (matches the Research arXiv badge) -->
           <div class="col col-sm-2 abbr">
-            <abbr class="badge rounded w-100">{{ post.date | date: "%b %d, %Y" }}</abbr>
+            <abbr class="badge rounded w-100">{{ post.date | date: '%b %d, %Y' }}</abbr>
           </div>
           <!-- Post title + description -->
           <div class="col-sm-8">

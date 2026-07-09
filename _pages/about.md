@@ -2,7 +2,7 @@
 layout: about
 title: Home
 permalink: /
-subtitle: 'Graduate student in Electronics, exploring VLSI, photonics, and quantum computing.'
+subtitle: "Graduate student in Electronics, exploring VLSI, photonics, and quantum computing."
 
 profile:
   align: left

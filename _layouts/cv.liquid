@@ -36,15 +36,24 @@ layout: default
             <h3 class="cv-section-title">
               <span class="cv-section-icon">
                 {% case entry.title %}
-                  {% when 'General Info' %}<i class="fa-solid fa-id-card"></i>
-                  {% when 'Education' %}<i class="fa-solid fa-graduation-cap"></i>
-                  {% when 'Experience' %}<i class="fa-solid fa-briefcase"></i>
-                  {% when 'Project Works' %}<i class="fa-solid fa-diagram-project"></i>
-                  {% when 'Extracurricular Activities' %}<i class="fa-solid fa-people-group"></i>
-                  {% when 'Honors and Awards' %}<i class="fa-solid fa-trophy"></i>
-                  {% when 'Certifications' %}<i class="fa-solid fa-certificate"></i>
-                  {% when 'Languages and Hobbies' %}<i class="fa-solid fa-language"></i>
-                  {% else %}<i class="fa-solid fa-circle-dot"></i>
+                  {% when 'General Info' -%}
+                    <i class="fa-solid fa-id-card"></i>
+                  {% when 'Education' -%}
+                    <i class="fa-solid fa-graduation-cap"></i>
+                  {% when 'Experience' -%}
+                    <i class="fa-solid fa-briefcase"></i>
+                  {% when 'Project Works' -%}
+                    <i class="fa-solid fa-diagram-project"></i>
+                  {% when 'Extracurricular Activities' -%}
+                    <i class="fa-solid fa-people-group"></i>
+                  {% when 'Honors and Awards' -%}
+                    <i class="fa-solid fa-trophy"></i>
+                  {% when 'Certifications' -%}
+                    <i class="fa-solid fa-certificate"></i>
+                  {% when 'Languages and Hobbies' -%}
+                    <i class="fa-solid fa-language"></i>
+                  {% else -%}
+                    <i class="fa-solid fa-circle-dot"></i>
                 {% endcase %}
               </span>
               {{ entry.title }}

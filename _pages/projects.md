@@ -10,6 +10,7 @@ nav_order: 2
 <!-- _pages/projects.md - data in _data/projects.yml, styles in assets/css/main.scss -->
 
 {% for grp in site.data.projects %}
+
   <section class="proj-group">
     <h2 class="cv-section-title">
       <span class="cv-section-icon"><i class="fa-solid {{ grp.icon }}"></i></span>
@@ -33,5 +34,6 @@ nav_order: 2
         </article>
       {% endfor %}
     </div>
+
   </section>
 {% endfor %}

@@ -17,9 +17,13 @@
       </div>
     {%- endcapture -%}
     <div class="journey-item journey-item--{% if pos == 0 %}top{% else %}bottom{% endif %}" style="--jc: {{ item.color }};">
-      <div class="journey-slot journey-slot--top">{% if pos == 0 %}{{ card }}{% endif %}</div>
+      <div class="journey-slot journey-slot--top">
+        {% if pos == 0 %}{{ card }}{% endif %}
+      </div>
       <span class="journey-node" aria-hidden="true"></span>
-      <div class="journey-slot journey-slot--bottom">{% if pos == 1 %}{{ card }}{% endif %}</div>
+      <div class="journey-slot journey-slot--bottom">
+        {% if pos == 1 %}{{ card }}{% endif %}
+      </div>
     </div>
   {%- endfor -%}
 </div>

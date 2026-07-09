@@ -17,6 +17,7 @@ nav_order: 1
 </div>
 
 {% for grp in site.data.skills %}
+
   <section class="skill-group">
     <h2 class="cv-section-title">
       <span class="cv-section-icon"><i class="fa-solid {{ grp.icon }}"></i></span>

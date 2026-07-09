@@ -18,7 +18,7 @@ related_posts: false
 
 তাই আজ সেই চিঠিই এখানে তুলে ধরছি-একটা খোলা চিঠি হিসেবে।
 
-***
+---
 
 প্রিয় তন্ময়,
 
@@ -46,4 +46,4 @@ related_posts: false
 
 <p style="text-align:right;">ইতি,<br/>সুজিৎ</p>
 
-***
+---
